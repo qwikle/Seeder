@@ -18,7 +18,6 @@ npm install
 
 - [pg](https://www.npmjs.com/package/pg)
 - [faker](https://www.npmjs.com/package/faker)
-- [dotenv](https://www.npmjs.com/package/dotenv)
 - [colors](https://www.npmjs.com/package/ainsi-colors)
 - [cli-progress](https://www.npmjs.com/package/cli-progress)
 - [prompts](https://www.npmjs.com/package/prompts)
