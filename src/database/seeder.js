@@ -25,7 +25,7 @@ class Seeder {
 
     async create(table, datas, number){
         bar.start(number, 0, {
-            message: colors.greenBright(`Adding ${number} data to ${table} table`),
+            message: colors.greenBright(`Adding ${number} Fake datas to [- ${table} -] table`),
         });
         let data = [];
         for (let i = 0; i < number; i++) {
@@ -38,7 +38,7 @@ class Seeder {
             bar.increment();
         }
         bar.stop();
-        console.log(colors.greenBright(`${number} data added to ${table} table`));
+        console.log(colors.greenBright(`${number} data added to [- ${table} -] table`));
         return true;
     }
 
