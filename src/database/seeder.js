@@ -24,10 +24,17 @@ class Seeder {
     }
 
     async create(table, datas, number){
-        bar.start(number, 0);
+        bar.start(number, 0, {
+            message: colors.greenBright(`Adding ${number} data to ${table} table`),
+        });
+        let data = [];
         for (let i = 0; i < number; i++) {
             const result = this.generateFaker(datas);
-            await this.dataMapper.createOne(table, result);
+           data.push(result);
+              if (data.length === 1000 || i === number - 1) {
+                await this.dataMapper.createMany(table, data);
+                data = [];
+            }
             bar.increment();
         }
         bar.stop();

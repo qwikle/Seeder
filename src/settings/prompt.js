@@ -1,48 +1,12 @@
 const prompt = require('prompts');
 const seeder = require('../database/seeder');
-const { faker } = require('@faker-js/faker');
-const { fakers, fakerTypes } = require('./faker');
+const { fakersQuestions, fakerTypesQuestions,dbConnectionQuestions } = require('./questions');
+const colors = require('ansi-colors');
 class Prompter {
 
 
    async DbConnection(){
-        const questions = [
-    {
-        type: 'number',
-        name: 'port',
-        message: 'What is the port of your PostgreSQL database?',
-        validate: value => value < 65536 && value > 0 ? true : 'Please enter a valid port number',
-        initial: 5432,
-        
-    },
-    {
-        type: 'text',
-        name: 'host',
-        message: 'What is the host of your PostgreSQL database?',
-        validate: value => value.length > 0 ? true : 'Please enter a valid host',
-        initial: 'localhost',
-    },
-    {
-        type: 'text',
-        name: 'user',
-        message: 'What is the user of your PostgreSQL database?',
-        validate: value => value.length > 0 ? true : 'Please enter a valid user',
-    },
-    {
-        type: 'invisible',
-        name: 'password',
-        message: 'What is the password of your PostgreSQL database?',
-        validate: value => value.length > 0 ? true : 'Please enter a valid password',
-    },
-    {
-        type: 'text',
-        name: 'database',
-        message: 'What is the name of your PostgreSQL database?',
-        validate: value => value.length > 0 ? true : 'Please enter a valid database name',
-    },
-
-];
-    const response = await prompt(questions, {
+    const response = await prompt(dbConnectionQuestions, {
         onCancel: () => {
             process.exit();
         }
@@ -56,21 +20,29 @@ class Prompter {
             {
                 type:'select',
                 name:'type',
-                message:`What type of data do you want to add to "${field}" column?`,
-                choices: fakers,
+                message:'What type of data do you want to add to "' + colors.blueBright(field) + '" column?',
+                choices: fakersQuestions,
 
             },
         ];
-        const response = await prompt(questions);
+        const response = await prompt(questions, {
+        onCancel: () => {
+            process.exit();
+        }
+    });
         const secondQuestion = [
             {
                 type: 'select',
                 name: 'fakerType',
                 message: 'Choose a type of data',
-                choices: fakerTypes[response.type],
+                choices: fakerTypesQuestions[response.type],
             }
         ]
-        const result = await prompt(secondQuestion);
+        const result = await prompt(secondQuestion, {
+        onCancel: () => {
+            process.exit();
+        }
+    });
         return {type: response.type, fakerType: result.fakerType}
     }
     /**
@@ -89,10 +61,15 @@ class Prompter {
                 type: 'number',
                 name: 'number',
                 message: 'How many data do you want to add?',
+                max: 5000000,
                 validate: value => value > 0 ? true : 'Please enter a valid number',
             }
         ];
-        const response = await prompt(questions);
+        const response = await prompt(questions, {
+        onCancel: () => {
+            process.exit();
+        }
+    });
         return response;
     }
 
@@ -111,7 +88,7 @@ class Prompter {
                     type: 'confirm',
                     name: 'continue',
                     message: 'Do you want to continue?',
-                    initial: true,
+                    initial: false,
                 });
                 if(response.continue){
                     await this.start();

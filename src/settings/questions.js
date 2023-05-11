@@ -1,4 +1,4 @@
-const fakerTypes = 
+const fakerTypesQuestions = 
     {
         address:[
             {title: 'Building Number', value: 'buildingNumber'},
@@ -247,33 +247,71 @@ const fakerTypes =
             {title: 'Vrm', value: 'vrm'},
         ],
     }
-const fakers = [
-    {title: 'Address', value: 'address', description: `${fakerTypes.address.map((type) => type.title).join(', ')}`},
-    {title: 'Animal', value: 'animal', description: `${fakerTypes.animal.map((type) => type.title).join(', ')}`},
-    {title: 'Color', value: 'color', description: `${fakerTypes.color.map((type) => type.title).join(', ')}`},
-    {title: 'Commerce', value: 'commerce', description: `${fakerTypes.commerce.map((type) => type.title).join(', ')}`},
-    {title: 'Company', value: 'company', description: `${fakerTypes.company.map((type) => type.title).join(', ')}`},
-    {title: 'Database', value: 'database', description: `${fakerTypes.database.map((type) => type.title).join(', ')}`},
+const fakersQuestions = [
+    {title: 'Address', value: 'address', description: `${fakerTypesQuestions.address.map((type) => type.title).join(', ')}`},
+    {title: 'Animal', value: 'animal', description: `${fakerTypesQuestions.animal.map((type) => type.title).join(', ')}`},
+    {title: 'Color', value: 'color', description: `${fakerTypesQuestions.color.map((type) => type.title).join(', ')}`},
+    {title: 'Commerce', value: 'commerce', description: `${fakerTypesQuestions.commerce.map((type) => type.title).join(', ')}`},
+    {title: 'Company', value: 'company', description: `${fakerTypesQuestions.company.map((type) => type.title).join(', ')}`},
+    {title: 'Database', value: 'database', description: `${fakerTypesQuestions.database.map((type) => type.title).join(', ')}`},
     //{title: 'Data Type', value: 'datatype'},
-    {title: 'Date', value: 'date', description: `${fakerTypes.date.map((type) => type.title).join(', ')}`},
-    {title: 'Finance', value: 'finance', description: `${fakerTypes.finance.map((type) => type.title).join(', ')}`},
-    {title: 'Git', value: 'git', description: `${fakerTypes.git.map((type) => type.title).join(', ')}`},
-    {title: 'Hacker', value: 'hacker', description: `${fakerTypes.hacker.map((type) => type.title).join(', ')}`},
-    {title: 'Image', value: 'image', description: `${fakerTypes.image.map((type) => type.title).join(', ')}`},
-    {title: 'Internet', value: 'internet', description: `${fakerTypes.internet.map((type) => type.title).join(', ')}`},
-    {title: 'Lorem', value: 'lorem', description: `${fakerTypes.lorem.map((type) => type.title).join(', ')}`},
-    {title: 'Mersenne', value: 'mersenne', description: `${fakerTypes.mersenne.map((type) => type.title).join(', ')}`},
-    {title: 'Music', value: 'music', description: `${fakerTypes.music.map((type) => type.title).join(', ')}`},
-    {title: 'Name', value: 'name', description: `${fakerTypes.name.map((type) => type.title).join(', ')}`},
-    {title: 'Phone', value: 'phone', description: `${fakerTypes.phone.map((type) => type.title).join(', ')}`},
-    {title: 'Random', value: 'random', description: `${fakerTypes.random.map((type) => type.title).join(', ')}`},
-    {title: 'Science', value: 'science', description: `${fakerTypes.science.map((type) => type.title).join(', ')}`},
-    {title: 'System', value: 'system', description: `${fakerTypes.system.map((type) => type.title).join(', ')}`},
-    {title: 'Vehicle', value: 'vehicle', description: `${fakerTypes.vehicle.map((type) => type.title).join(', ')}`},
+    {title: 'Date', value: 'date', description: `${fakerTypesQuestions.date.map((type) => type.title).join(', ')}`},
+    {title: 'Finance', value: 'finance', description: `${fakerTypesQuestions.finance.map((type) => type.title).join(', ')}`},
+    {title: 'Git', value: 'git', description: `${fakerTypesQuestions.git.map((type) => type.title).join(', ')}`},
+    {title: 'Hacker', value: 'hacker', description: `${fakerTypesQuestions.hacker.map((type) => type.title).join(', ')}`},
+    {title: 'Image', value: 'image', description: `${fakerTypesQuestions.image.map((type) => type.title).join(', ')}`},
+    {title: 'Internet', value: 'internet', description: `${fakerTypesQuestions.internet.map((type) => type.title).join(', ')}`},
+    {title: 'Lorem', value: 'lorem', description: `${fakerTypesQuestions.lorem.map((type) => type.title).join(', ')}`},
+    {title: 'Mersenne', value: 'mersenne', description: `${fakerTypesQuestions.mersenne.map((type) => type.title).join(', ')}`},
+    {title: 'Music', value: 'music', description: `${fakerTypesQuestions.music.map((type) => type.title).join(', ')}`},
+    {title: 'Name', value: 'name', description: `${fakerTypesQuestions.name.map((type) => type.title).join(', ')}`},
+    {title: 'Phone', value: 'phone', description: `${fakerTypesQuestions.phone.map((type) => type.title).join(', ')}`},
+    {title: 'Random', value: 'random', description: `${fakerTypesQuestions.random.map((type) => type.title).join(', ')}`},
+    {title: 'Science', value: 'science', description: `${fakerTypesQuestions.science.map((type) => type.title).join(', ')}`},
+    {title: 'System', value: 'system', description: `${fakerTypesQuestions.system.map((type) => type.title).join(', ')}`},
+    {title: 'Vehicle', value: 'vehicle', description: `${fakerTypesQuestions.vehicle.map((type) => type.title).join(', ')}`},
     
 ]
 
+const dbConnectionQuestions = [
+    {
+        type: 'number',
+        name: 'port',
+        message: 'What is the port of your PostgreSQL database?',
+        validate: value => value < 65536 && value > 0 ? true : 'Please enter a valid port number',
+        initial: 5432,
+        
+    },
+    {
+        type: 'text',
+        name: 'host',
+        message: 'What is the host of your PostgreSQL database?',
+        validate: value => value.length > 0 ? true : 'Please enter a valid host',
+        initial: 'localhost',
+    },
+    {
+        type: 'text',
+        name: 'user',
+        message: 'What is the user of your PostgreSQL database?',
+        validate: value => value.length > 0 ? true : 'Please enter a valid user',
+    },
+    {
+        type: 'invisible',
+        name: 'password',
+        message: 'What is the password of your PostgreSQL database?',
+        validate: value => value.length > 0 ? true : 'Please enter a valid password',
+    },
+    {
+        type: 'text',
+        name: 'database',
+        message: 'What is the name of your PostgreSQL database?',
+        validate: value => value.length > 0 ? true : 'Please enter a valid database name',
+    },
+
+]
+
 module.exports = {
-    fakers,
-    fakerTypes,
+    fakersQuestions,
+    fakerTypesQuestions,
+    dbConnectionQuestions,
 }
