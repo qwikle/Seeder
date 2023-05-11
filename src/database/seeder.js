@@ -31,7 +31,7 @@ class Seeder {
         for (let i = 0; i < number; i++) {
             const result = this.generateFaker(datas);
            data.push(result);
-              if (data.length === 1000 || i === number - 1) {
+              if (data.length === 10000 || i === number - 1) {
                 await this.dataMapper.createMany(table, data);
                 data = [];
             }

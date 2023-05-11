@@ -61,7 +61,7 @@ class Prompter {
                 type: 'number',
                 name: 'number',
                 message: 'How many data do you want to add?',
-                max: 5000000,
+                max: 50000000,
                 validate: value => value > 0 ? true : 'Please enter a valid number',
             }
         ];
